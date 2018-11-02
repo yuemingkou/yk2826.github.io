@@ -7,3 +7,5 @@ title: "About"
 This site is made by RStudio.
 
 R version 3.5.1 (2018-07-02) -- "Feather Spray"
+
+The source for the site on GitHub is [here](https://github.com/yuemingkou/yk2826.github.io).
