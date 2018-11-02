@@ -218,7 +218,15 @@ $(document).ready(function () {
 </div>
 
 
-
+<p>Get the data I care about</p>
+<pre class="r"><code>data(ny_noaa)
+ny_clean = ny_noaa %&gt;% 
+  separate(date, into = c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;), sep = &quot;-&quot;) %&gt;% 
+  mutate(prcp = prcp / 10, tmin = as.numeric(tmin) / 10, 
+         tmax = as.numeric(tmax) / 10) %&gt;% 
+  filter(!is.na(prcp) &amp; !is.na(snow) &amp; !is.na(snwd) &amp; !is.na(tmax) &amp; !is.na(tmin),
+         year &gt;= 2005) %&gt;% 
+  sample_n(3000)</code></pre>
 
 
 

@@ -10,3 +10,15 @@ library(p8105.datasets)
 library(plotly)
 ```
 
+Get the data I care about
+
+```{r load_data}
+data(ny_noaa)
+ny_clean = ny_noaa %>% 
+  separate(date, into = c("year", "month", "day"), sep = "-") %>% 
+  mutate(prcp = prcp / 10, tmin = as.numeric(tmin) / 10, 
+         tmax = as.numeric(tmax) / 10) %>% 
+  filter(!is.na(prcp) & !is.na(snow) & !is.na(snwd) & !is.na(tmax) & !is.na(tmin),
+         year >= 2005) %>% 
+  sample_n(3000)
+```
