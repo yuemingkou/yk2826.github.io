@@ -27,7 +27,7 @@ ny_clean = ny_noaa %>%
 Column {data-width=600}
 -----------------------------------------------------------------------
 
-### Chart A
+### Temperature plot
 
 ```{r}
 ny_clean %>%
@@ -39,7 +39,7 @@ ny_clean %>%
 Column {data-width=400}
 -----------------------------------------------------------------------
 
-### Chart B
+### Temperature in July over years
 
 ```{r}
 ny_clean %>%
@@ -52,7 +52,7 @@ ny_clean %>%
           colors = "Set2")
 ```
 
-### Chart C
+### Precipitation plot
 
 ```{r}
 ny_clean %>%

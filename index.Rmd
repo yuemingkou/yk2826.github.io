@@ -22,4 +22,4 @@ My plotly page is [here](plotly.html).
 
 My flexdashboard is [here](dashboard_template.html).
 
-The source for the site on GitHub is [here](https://github.com/yuemingkou/yk2826.github.io)
+The source for the site on GitHub is [here](https://github.com/yuemingkou/yk2826.github.io).
