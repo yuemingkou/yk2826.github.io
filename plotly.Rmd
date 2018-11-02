@@ -22,3 +22,12 @@ ny_clean = ny_noaa %>%
          year >= 2005) %>% 
   sample_n(3000)
 ```
+
+### Plotly scatterplot
+
+```{r scatterplot}
+ny_clean %>%
+  filter(year >= 2008) %>% 
+  plot_ly(x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
+          color = ~year, alpha = 0.5)
+```
