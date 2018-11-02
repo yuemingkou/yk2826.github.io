@@ -1,0 +1,64 @@
+---
+title: "NOAA Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+
+```{r}
+data(ny_noaa)
+ny_clean = ny_noaa %>% 
+  separate(date, into = c("year", "month", "day"), sep = "-") %>% 
+  mutate(prcp = prcp / 10, tmin = as.numeric(tmin) / 10, 
+         tmax = as.numeric(tmax) / 10) %>% 
+  filter(!is.na(prcp) & !is.na(snow) & !is.na(snwd) & !is.na(tmax) & !is.na(tmin),
+         year >= 2005) %>% 
+  sample_n(3000)
+```
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+ny_clean %>%
+  filter(year >= 2008) %>% 
+  plot_ly(x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
+          color = ~year, alpha = 0.5)
+```
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+ny_clean %>%
+  filter(month == "07") %>% 
+  group_by(year, month, id) %>% 
+  summarize(July_tmax = mean(tmax, na.rm = TRUE)) %>% 
+  mutate(text_label = str_c("ID: ", id)) %>%
+  plot_ly(y = ~July_tmax, color = ~year, type = "box",
+          text = ~text_label,
+          colors = "Set2")
+```
+
+### Chart C
+
+```{r}
+ny_clean %>%
+  group_by(year, month) %>% 
+  summarize(average_prcp = mean(prcp)) %>% 
+  plot_ly(x = ~month, y = ~average_prcp, type = "scatter",
+          color = ~year, mode = 'lines')
+```
+
