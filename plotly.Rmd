@@ -31,3 +31,16 @@ ny_clean %>%
   plot_ly(x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
           color = ~year, alpha = 0.5)
 ```
+
+### Plotly box plot
+
+```{r boxplot}
+ny_clean %>%
+  filter(month == "07") %>% 
+  group_by(year, month, id) %>% 
+  summarize(July_tmax = mean(tmax, na.rm = TRUE)) %>% 
+  mutate(text_label = str_c("ID: ", id)) %>%
+  plot_ly(y = ~July_tmax, color = ~year, type = "box",
+          text = ~text_label,
+          colors = "Set2")
+```
