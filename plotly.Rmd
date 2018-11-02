@@ -44,3 +44,13 @@ ny_clean %>%
           text = ~text_label,
           colors = "Set2")
 ```
+
+### Plotly line plot
+
+```{r}
+ny_clean %>%
+  group_by(year, month) %>% 
+  summarize(average_prcp = mean(prcp)) %>% 
+  plot_ly(x = ~month, y = ~average_prcp, type = "scatter",
+          color = ~year, mode = 'lines')
+```
